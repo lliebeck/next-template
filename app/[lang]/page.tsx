@@ -1,8 +1,7 @@
 import Typography from "@mui/material/Typography";
-import { getDictionary } from "../../get-dictionary";
 import { Locale } from "../../config/i18n-config";
-import Counter from "./components/counter";
-import LocaleSwitcher from "./components/locale-switcher";
+import { getDictionary } from "../../get-dictionary";
+import Counter from "./components/Counter";
 
 export default async function IndexPage({
   params: { lang },
@@ -13,7 +12,6 @@ export default async function IndexPage({
 
   return (
     <div>
-      <LocaleSwitcher />
       <Typography>Current locale: {lang}</Typography>
       <Typography>
         This text is rendered on the server:{" "}
