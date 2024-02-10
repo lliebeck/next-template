@@ -3,7 +3,12 @@ import { Inter } from "next/font/google";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import "./globals.css";
 import { ThemeProvider } from "@mui/material/styles";
-import theme from "./config/theme";
+import theme from "../../config/theme";
+import { i18n, type Locale } from "../../config/i18n-config";
+
+export async function generateStaticParams() {
+  return i18n.locales.map((locale) => ({ lang: locale }));
+}
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,11 +19,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: { lang: Locale };
 }>) {
   return (
-    <html lang="en">
+    <html lang={params.lang}>
       <AppRouterCacheProvider options={{ key: "css" }}>
         <ThemeProvider theme={theme}>{children}</ThemeProvider>
       </AppRouterCacheProvider>
