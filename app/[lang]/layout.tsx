@@ -1,7 +1,6 @@
+import { AppThemeProvider } from "@/config/AppThemeProvider";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import type { Metadata } from "next";
-import { AppThemeProvider } from "@/config/AppThemeProvider";
-import Container from "@mui/material/Container";
 import { i18n, type Locale } from "../../config/i18n-config";
 import { CustomAppBar } from "./components/CustomAppBar";
 

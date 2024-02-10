@@ -5,6 +5,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { Roboto } from "next/font/google";
 import { createTheme } from "@mui/material/styles";
 import { useColorMode } from "../stores/colorModeStore";
+import { useMemo } from "react";
 
 const roboto = Roboto({
   weight: ["300", "400", "500", "700"],
@@ -17,14 +18,18 @@ export const AppThemeProvider = ({
 }: {} & React.PropsWithChildren) => {
   const { mode } = useColorMode();
 
-  const theme = createTheme({
-    palette: {
-      mode: mode,
-    },
-    typography: {
-      fontFamily: roboto.style.fontFamily,
-    },
-  });
+  const theme = useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode: mode,
+        },
+        typography: {
+          fontFamily: roboto.style.fontFamily,
+        },
+      }),
+    [mode]
+  );
 
   return (
     <ThemeProvider theme={theme}>
