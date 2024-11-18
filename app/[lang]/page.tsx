@@ -3,11 +3,17 @@ import { Locale } from "../../config/i18n-config";
 import { getDictionary } from "../../get-dictionary";
 import Counter from "./components/counter";
 
-export default async function IndexPage({
-  params: { lang },
-}: {
-  params: { lang: Locale };
-}) {
+export default async function IndexPage(
+  props: {
+    params: Promise<{ lang: Locale }>;
+  }
+) {
+  const params = await props.params;
+
+  const {
+    lang
+  } = params;
+
   const dictionary = await getDictionary(lang);
 
   return (
