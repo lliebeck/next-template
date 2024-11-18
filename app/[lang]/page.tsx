@@ -1,7 +1,7 @@
 import Typography from "@mui/material/Typography";
 import { Locale } from "../../config/i18n-config";
 import { getDictionary } from "../../get-dictionary";
-import Counter from "./components/Counter";
+import Counter from "./components/counter";
 
 export default async function IndexPage({
   params: { lang },
