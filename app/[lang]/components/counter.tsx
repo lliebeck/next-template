@@ -2,8 +2,7 @@
 
 import { useState } from "react";
 import { type getDictionary } from "../../../get-dictionary";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+import { Button, Title } from "@mantine/core";
 import { useRouter } from "next/navigation";
 
 export default function Counter({
@@ -14,22 +13,23 @@ export default function Counter({
   const [count, setCount] = useState(0);
   const router = useRouter();
   return (
-    <Typography>
+    <Title order={4}>
       This component is rendered on client:
-      <Button onClick={() => setCount((n) => n - 1)}>
+      <Button mx="xs" color="orange" onClick={() => setCount((n) => n - 1)}>
         {dictionary.decrement}
       </Button>
       {count}
-      <Button onClick={() => setCount((n) => n + 1)}>
+      <Button mx="xs" onClick={() => setCount((n) => n + 1)}>
         {dictionary.increment}
       </Button>
       <Button
+        mx="xs"
         onClick={() => {
           router.push("/home");
         }}
       >
         Home
       </Button>
-    </Typography>
+    </Title>
   );
 }

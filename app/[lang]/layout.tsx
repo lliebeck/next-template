@@ -1,8 +1,11 @@
-import { AppThemeProvider } from "@/config/AppThemeProvider";
-import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
+import "@mantine/core/styles.css";
+import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 import type { Metadata } from "next";
-import { i18n, type Locale } from "../../config/i18n-config";
-import { CustomAppBar } from "./components/CustomAppBar";
+import { i18n } from "../../config/i18n-config";
+import { theme } from "../../config/theme";
+import { CustomAppShell } from "./components/CustomAppShell";
+
+type Params = Promise<{ lang: string }>;
 
 export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
@@ -13,27 +16,24 @@ export const metadata: Metadata = {
   description: "Next template with MUI and i18n",
 };
 
-export default async function RootLayout(
-  props: Readonly<{
-    children: React.ReactNode;
-    params: { lang: Locale };
-  }>
-) {
-  const params = await props.params;
-
-  const {
-    children
-  } = props;
+export default async function RootLayout({
+  children,
+  params,
+}: {
+  children: React.ReactNode;
+  params: Params;
+}) {
+  const { lang } = await params;
 
   return (
-    <html lang={params.lang}>
+    <html lang={lang} suppressHydrationWarning>
+      <head>
+        <ColorSchemeScript />
+      </head>
       <body>
-        <AppRouterCacheProvider options={{ key: "css" }}>
-          <AppThemeProvider>
-            <CustomAppBar />
-            {children}
-          </AppThemeProvider>
-        </AppRouterCacheProvider>
+        <MantineProvider theme={theme} defaultColorScheme="dark">
+          <CustomAppShell>{children}</CustomAppShell>
+        </MantineProvider>
       </body>
     </html>
   );

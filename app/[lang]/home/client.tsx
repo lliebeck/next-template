@@ -1,11 +1,10 @@
 "use client";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
+import { Title } from "@mantine/core";
 
 type Props = {
   servers: any;
 };
 
 export const Client = ({ servers }: Props) => {
-  return <Typography>{JSON.stringify(servers, undefined, 0)}</Typography>;
+  return <Title order={4}>{JSON.stringify(servers, undefined, 0)}</Title>;
 };
